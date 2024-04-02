@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="salaba.dao.BoardFileDao">
+
+  <resultMap id="BoardFileMap" type="BoardFile">
+    <id column="file_no" property="no"/>
+    <result column="file_path" property="filePath"/>
+    <result column="community_no" property="communityNo"/>
+  </resultMap>
+
+  <insert id="add" parameterType="BoardFile">
+    insert into community_files (file_path,community_no)
+    values (#{filePath},#{community_no})
+  </insert>
+
+  <insert id="addAll" parameterType="list">
+    insert into community_files (file_path,community_no)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.filePath}, #{item.communityNo})
+    </foreach>
+  </insert>
+
+  <delete id="delete" parameterType="int">
+    delete from community_files
+    where file_no=#{value}
+  </delete>
+
+  <delete id="deleteAll" parameterType="int">
+    delete from community_files
+    where community_no=#{value}
+  </delete>
+
+  <select id="findAllByCommunityNo" resultMap="BoardFileMap" parameterType="int">
+    select
+      file_no,
+      file_path,
+      community_no
+    from
+      community_files
+    where
+      community_no=#{value}
+    order by
+      file_no asc
+  </select>
+
+  <select id="findByNo" resultMap="BoardFileMap" parameterType="int">
+    select
+      file_no,
+      file_path,
+      community_no
+    from
+      community_files
+    where
+      file_no=#{value}
+  </select>
+
+</mapper>
