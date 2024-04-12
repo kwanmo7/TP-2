@@ -8,5 +8,5 @@ public class Region {
 
   private int regionNo;
   private String regionName;
-  private Nation nationName;
+  private Nation nation;
 }

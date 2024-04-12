@@ -20,5 +20,4 @@ public class BoardFile implements Serializable { // 게시판, 신고 첨부파�
   private String uuidFileName; // UUID 파일명
   private int order; // 사진 순서
 
-
 }

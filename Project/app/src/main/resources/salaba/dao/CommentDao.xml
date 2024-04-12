@@ -15,7 +15,7 @@
     <!-- 회원정보 가져오기 -->
    <association property="writer" javaType="Member">
      <id column="member_no" property="no"/>
-     <result column="name" property="name"/>
+     <result column="nickname" property="nickname"/>
    </association>
   </resultMap>
 
@@ -43,7 +43,8 @@
       c.comment_no,
       c.content,
       c.created_date,
-      m.name,
+      m.member_no,
+      m.nickname,
       m.photo
     from
      comment c
