@@ -6,43 +6,45 @@
 <mapper namespace="salaba.dao.BoardFileDao">
 
   <resultMap id="BoardFileMap" type="BoardFile">
-    <id column="file_no" property="no"/>
-    <result column="file_path" property="filePath"/>
-    <result column="community_no" property="communityNo"/>
+    <id column="file_no" property="fileNo"/>
+    <result column="board_no" property="boardNo"/>
+    <result column="ori_file_name" property="oriFileName"/>
+    <result column="uuid_file_name" property="uuidFileName"/>
   </resultMap>
 
   <insert id="add" parameterType="BoardFile">
-    insert into community_files (file_path,community_no)
-    values (#{filePath},#{community_no})
+    insert into board_files (board_no, ori_file_name, uuid_file_name)
+    values (#{board_no},#{ori_file_name})
   </insert>
 
   <insert id="addAll" parameterType="list">
-    insert into community_files (file_path,community_no)
+    insert into board_files (board_no, ori_file_name, uuid_file_name)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.filePath}, #{item.communityNo})
+      (#{item.boardNo},#{item.oriFileName},#{item.uuidFildName})
     </foreach>
   </insert>
 
   <delete id="delete" parameterType="int">
-    delete from community_files
+    delete from board_files
     where file_no=#{value}
   </delete>
 
   <delete id="deleteAll" parameterType="int">
-    delete from community_files
-    where community_no=#{value}
+    delete from board_files
+    where board_no=#{value}
   </delete>
 
-  <select id="findAllByCommunityNo" resultMap="BoardFileMap" parameterType="int">
+  <select id="findAllByBoardNo" resultMap="BoardFileMap" parameterType="int">
     select
       file_no,
-      file_path,
-      community_no
+      board_no,
+      ori_file_name,
+      uuid_file_name
     from
-      community_files
+      board_files
     where
-      community_no=#{value}
+      board_no=#{value}
     order by
       file_no asc
   </select>
@@ -50,10 +52,9 @@
   <select id="findByNo" resultMap="BoardFileMap" parameterType="int">
     select
       file_no,
-      file_path,
-      community_no
+      board_no
     from
-      community_files
+      board_files
     where
       file_no=#{value}
   </select>

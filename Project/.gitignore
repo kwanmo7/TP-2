@@ -238,7 +238,7 @@ fabric.properties
 .idea/**/sonarlint/
 
 # SonarQube Plugin
-# https://plugins.jetbrains.com/plugin/7238-sonarqube-community-plugin
+# https://plugins.jetbrains.com/plugin/7238-sonarqube-board-plugin
 .idea/**/sonarIssues.xml
 
 # Markdown Navigator plugin
