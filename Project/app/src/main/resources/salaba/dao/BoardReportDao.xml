@@ -29,7 +29,7 @@
   <insert id="add" parameterType="BoardReport"
     useGeneratedKeys="true" keyColumn="report_no" keyProperty="reportNo">
     insert into boardReport(content,writer,category_no)
-    values(#{content},#{writer.no},#{category_no})
+    values(#{content},#{writer.no},#{categoryNo})
   </insert>
 
   <select id="findAll" resultMap="BoardReportMap">
@@ -42,7 +42,7 @@
     from
     board_report_detail
     where
-    report_target_type = #{report_target_type}
+    report_target_type = #{reportTargetType}
     order by
     report_date desc
   </select>
@@ -63,7 +63,7 @@
     board_report_file t2,
     board_report_category t3
     where
-    t1.report_no = #{report_no} and
+    t1.report_no = #{reportNo} and
     t1.report_no = t2.report_no and
     t1.report_category_no = t3.report_category_no
   </select>
@@ -72,7 +72,7 @@
     update board_report_detail set
     state=#{state}
     where
-    report_no=#{report_no}
+    report_no=#{reportNo}
   </update>
 
   <select id="countAll" resultType="int" parameterType="int">
