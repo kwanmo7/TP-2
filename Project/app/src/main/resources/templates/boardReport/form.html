@@ -10,10 +10,8 @@
 
 <h1 data-th-text="${boardReportName}">신고</h1>
 
-<form action="" data-th-action="@{addReport}" enctype='multipart/form-data' method='post'>
-  <input data-th-value="${categoryNo}" name='categoryNo' type='hidden'>
-  <form action="update" data-th-action="@{update}" data-th-object="${boardReport}" enctype='multipart/form-data' method='post'>
-    <input data-th-value="${targetNo}" name='targetNo' type='hidden'>
+<form action="addReport" data-th-action="@{addReport}" enctype='multipart/form-data' method='post'>
+  <input data-th-value="${targetNo}" name='targetNo' type='hidden'>
     <div>
       신고 유형: <select name="categoryNo">
       <option value="1">스팸홍보/도배</option>
