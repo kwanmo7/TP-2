@@ -75,4 +75,9 @@ public class DefaultMemberService implements MemberService {
   public Member chkPw(Member member) {
     return memberDao.chkPw(member);
   }
+
+  @Override
+  public Member getByEmail(String email) {
+    return memberDao.findByEmail(email);
+  }
 }

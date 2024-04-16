@@ -30,7 +30,7 @@
 <table width="300">
   <tr>
     <td>
-      <a  href="form"><button style="width:100px;">google 로그인</button></a>
+        <button id="googleLoginButton">google 로그인</button>
     </td>
     <td align="right">
       <a data-th-href="@{/member/form}" href="form"><button style="width:100px;">회원가입</button></a>
@@ -54,9 +54,32 @@
   </tr>
 </table>
 
-
-
 <div data-th-replace="footer :: footer">꼬리말</div>
+
+<script>
+  document.getElementById('googleLoginButton').addEventListener('click', function() {
+     // 새 창 열기
+    var newWindow = window.open('', '_blank', 'width=600,height=400');
+
+    // 새 창의 문서에 폼 생성
+    var form = newWindow.document.createElement('form');
+    form.method = 'post';  // 메서드를 POST로 설정
+    form.action = 'login/google';  // 요청을 보낼 URL 설정
+
+    // 폼에 추가할 필드(예: 파라미터)를 설정
+    var input = newWindow.document.createElement('input');
+    input.type = 'hidden';  // hidden 필드
+    input.name = 'parameterName';  // 파라미터 이름
+    input.value = 'parameterValue';  // 파라미터 값
+    form.appendChild(input);
+
+    // 폼을 새 창의 문서에 추가
+    newWindow.document.body.appendChild(form);
+
+    // 폼 서브밋
+    form.submit();
+  });
+</script>
 
 </body>
 </html>

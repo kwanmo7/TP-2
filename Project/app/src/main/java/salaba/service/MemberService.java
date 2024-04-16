@@ -27,4 +27,6 @@ public interface MemberService {
   void chgPwSave(Member member);
 
   Member chkPw(Member member);
+
+  Member getByEmail(String email);
 }

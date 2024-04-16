@@ -33,5 +33,7 @@ public interface MemberDao {
 
   public Member chkPw(Member member);
 
+  public Member findByEmail(@Param("email") String email);
+
 
 }
