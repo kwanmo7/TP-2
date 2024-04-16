@@ -3,6 +3,7 @@
 
 ncp-secret.properties
 ncp.properties
+application-oauth.properties 
 
 ### Eclipse ###
 .metadata
