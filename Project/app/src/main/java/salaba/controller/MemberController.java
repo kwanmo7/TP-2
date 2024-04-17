@@ -44,10 +44,15 @@ public class MemberController implements InitializingBean {
   @GetMapping("form")
   public void form(
       Model model,
-      HttpServletRequest request) throws Exception {
+      HttpServletRequest request,
+      HttpSession session) throws Exception {
 
     String nickcheck = request.getParameter("nickcheck");
     model.addAttribute("nickcheck", nickcheck);
+    Member newMember = (Member) session.getAttribute("newMember");
+    if (newMember != null) {
+      model.addAttribute("newMember", newMember);
+    }
   }
 
   @PostMapping("add")

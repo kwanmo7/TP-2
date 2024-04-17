@@ -47,11 +47,12 @@ public class SocialLoginController {
         Member existingMember = memberService.getByEmail(member.getEmail());
         if (existingMember == null) {
             session.setAttribute("newMember", member);
-            
-            //회원가입 페이지로 이동
+            //창을 닫고 회원가입 페이지로 이동(추가적인 정보필요)
+            response.getWriter().println("<script>window.close(); window.opener.location.href='/member/form ';</script>");
         } else {
             session.setAttribute("loginUser", existingMember);
-            response.sendRedirect("/home");
+            //창을 닫고 홈으로 이동
+            response.getWriter().println("<script>window.close(); window.opener.location.href='/home';</script>");
         }
     }
 

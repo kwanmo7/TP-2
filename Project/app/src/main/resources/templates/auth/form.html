@@ -78,6 +78,17 @@
 
     // 폼 서브밋
     form.submit();
+
+    if (newWindow) {
+      newWindow.onbeforeunload = function() {
+                    // 팝업이 닫히면 이곳에서 처리
+                    // 인증 결과를 가져와서 처리
+                    // 성공 시 기존 창으로 돌아가기
+                    window.location.href = "/home";
+                };
+    }
+
+
   });
 </script>
 
