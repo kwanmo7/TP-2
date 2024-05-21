@@ -2,28 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb4328c9-b3f7-4893-b19f-ab113dda39a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/controller/PaymentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/dao/PaymentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/service/PaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/service/impl/DefaultPaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/vo/Payment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/salaba/dao/PaymentDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/.idea/modules/app/Project.salaba.app.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/controller/RentalHomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/controller/RentalHomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/dao/RentalHomeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/dao/RentalHomeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/service/RentalHomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/service/RentalHomeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/service/impl/DefaultRentalHomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/service/impl/DefaultRentalHomeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/vo/ConstVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/vo/ConstVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/vo/Reservation2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/java/salaba/vo/Reservation2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/resources/salaba/dao/RentalHomeDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/salaba/dao/RentalHomeDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/chat/log/chat-48.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/chat/log/chat-51.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/chat/log/chat-52.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminProject/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminProject/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminProject/.idea/modules/app/AdminProject.app.main.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Project/app/src/main/resources/static/js/rental_home/reservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/static/js/rental_home/reservation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Project/app/src/main/resources/static/js/rental_home/view.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/static/js/rental_home/view.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/resources/templates/rentalHome/reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/templates/rentalHome/reservation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project/app/src/main/resources/templates/board/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project/app/src/main/resources/templates/board/view.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,26 +19,26 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2gV0xdttCLks7eY1qbwLD8NpwE4" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "board2",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;board2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-corretto-21.0.2-f644763e9732-d6553c93" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-249ae16d76d6-69315bf7" />
       </set>
     </attachedChunks>
   </component>

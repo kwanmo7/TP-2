@@ -98,7 +98,8 @@ document.getElementById("reportForm").addEventListener("submit", (event) => {
   const category = document.getElementById("category").value;
   const content = document.getElementById("rentalHome-report-content").value;
   const rentalHomeNo = rentalHomeNoModel;
-  
+  const memberNo = sessionUser.no;
+
   // RentalHomeReport 객체 생성
   const rentalHomeReport = {
     rentalHomeNo: rentalHomeNo,
@@ -107,7 +108,7 @@ document.getElementById("reportForm").addEventListener("submit", (event) => {
     reportCategoryNo: category
   }
   console.log(rentalHomeReport)
-  
+
   if (sessionUser == null) {
     Swal.fire({
       icon: "error",
@@ -115,8 +116,7 @@ document.getElementById("reportForm").addEventListener("submit", (event) => {
     });
     return;
   }
-  const memberNo = sessionUser.no;
-  
+
   // Ajax 요청 보내기
   $.ajax({
     type: "POST",

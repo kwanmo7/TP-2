@@ -144,7 +144,7 @@
           <div class="filter-options-theme" data-th-each="theme : ${session.themeList}" data-th-if="${theme.themeNo >= 10 && theme.themeNo < 100}">
             <img data-th-src="@{'https://5ns6sjke2756.edge.naverncp.com/nBMc0TCJiv/theme/' + ${theme.themeName} + .png(type=f,w=24,h=24,faceopt=false,ttype=png)}">
             <input type="checkbox" class="btn-check" data-th-id="${'check-'+theme.themeNo}" name="theme" data-th-value="${theme.themeName}" autocomplete="off">
-            <label class="theme-checkbox-label btn" data-th-for="${'check-'+theme.themeNo}" data-th-text="${theme.themeName}">
+            <label class="theme-checkbox-label btn" data-th-for="${'check-'+theme.themeNo}" data-th-text="${theme.themeName}"></label>
           </div>
         </div>
         <div class="row p-2">

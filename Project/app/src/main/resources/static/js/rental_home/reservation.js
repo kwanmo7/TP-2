@@ -127,7 +127,7 @@ function requestPay(paymethod) {
                   else {
                     Swal.fire({
                       icon: "error",
-                      title: "결제에 실패하였습니다.",
+                      title: "결제에 실패하였습니다1.",
                       showConfirmButton: false,
                       timer: 1500
                     });
@@ -136,7 +136,7 @@ function requestPay(paymethod) {
               } else {
                 Swal.fire({
                   icon: "error",
-                  title: "결제에 실패하였습니다.",
+                  title: "결제에 실패하였습니다2.",
                   text: rsp.error_msg,
                   showConfirmButton: false,
                   timer: 1500
