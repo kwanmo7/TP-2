@@ -15,21 +15,28 @@
 
     <div class="container">
       <h3>메뉴 이름</h3>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>신고유형</th>
-            <th>처리여부</th>
-            <th>접수일</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-        <tfoot>
-          <td colspan="10" class="tablefoot"></td>
-        </tfoot>
-      </table>
+      <div class="button-container">
+        <button id="all">전체</button>
+        <button id="incomplete">미처리</button>
+        <button id="complete">처리</button>
+      </div>
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+                <th>No</th>
+                <th>신고유형</th>
+                <th>처리여부</th>
+                <th>접수일</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
 
     <div id="detailModal" class="modal">
@@ -44,7 +51,7 @@
       <tr class="rowItem">
             <td>{{reportNo}}</td>
             <td>{{categoryName}}</td>
-            <td>{{stateStr}}</td>
+            <td class="state">{{stateStr}}</td>
             <td>{{reportDate}}</td>
             <td class='reporterNo' hidden>{{reporter.memberNo}}</td>
             <td class='rentalNo' hidden>{{targetRental.rentalNo}}</td>
@@ -106,18 +113,7 @@
           </div>
 
           <br>
-
-          <h4 class="partTitle">신고 파일</h4>
-          <div class="imgFiles">
-            {{#each reportFiles}}
-            <div>
-                <div class="card">
-                    <img class="imgFile" src="https://kr.object.ncloudstorage.com/tp3-salaba/board/{{uuidName}}"">
-                </div>
-            </div>
-            {{/each}}
-            <div class="hr"></div>
-        </div>
+          
 
           <br>
           <div class="dealBox">
@@ -202,11 +198,11 @@
         </script>
 
      
-
-    <script src="/js/list.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/common.js"></script>
     <script src="/js/page-init.js"></script>
     <script src="list.js"></script>
+    <script src="/js/list.js"></script>
 
   </body>
 </html>

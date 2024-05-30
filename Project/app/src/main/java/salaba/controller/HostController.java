@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Host;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import salaba.service.HostService;
 import salaba.service.MemberService;
 import salaba.service.StorageService;
-import salaba.util.Translator;
 import salaba.vo.Member;
 import salaba.vo.Region;
 import salaba.vo.host.HostReservation;
@@ -38,7 +36,7 @@ import salaba.vo.rental_home.Theme;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/host")
-@SessionAttributes("rental_home")
+@SessionAttributes("rentalHome")
 
 public class HostController {
 
@@ -79,12 +77,12 @@ public class HostController {
   @PostMapping("rentalHomeSave")
   @ResponseBody
   public String rentalHomeSave(
-      HttpSession session,
       Model model,
       RentalHome rentalHome,
       MultipartFile[] photos,
       String[] photoExplanations) throws Exception {
-
+    log.debug("@@rentalHome: " + rentalHome.getName());
+    log.debug(rentalHome.getHostingStartDate());
     List<Region> regionList = hostService.regionList();
 
     for (Region region : regionList) {
@@ -117,6 +115,7 @@ public class HostController {
 
     RentalHome rentalHome = (RentalHome) session.getAttribute("rentalHome");
 
+
     rentalHome.setThemes(themeTransform(themeNos, themeNames, type));
 
     model.addAttribute("rentalHome", rentalHome);
@@ -142,8 +141,7 @@ public class HostController {
   ) {
     RentalHome rentalHome = (RentalHome) session.getAttribute("rentalHome");
 
-    rentalHome.setRentalHomeFacilities(
-        facilityTransform(facilityCount, facilityNos, facilityNames));
+    rentalHome.setRentalHomeFacilities(facilityTransform(facilityCount, facilityNos, facilityNames));
 
     rentalHome.setCapacity(capacity);
 
@@ -167,7 +165,8 @@ public class HostController {
 
     RentalHome rentalHome = (RentalHome) session.getAttribute("rentalHome");
     Member loginUser = (Member) session.getAttribute("loginUser");
-    hostService.rentalHomeAdd(rentalHome);
+    int hostNo = loginUser.getNo();
+    hostService.rentalHomeAdd(rentalHome, hostNo);
 
     // 숙소 등록 후 임시 정보 값 제거
     sessionStatus.setComplete();
@@ -180,14 +179,14 @@ public class HostController {
   public void rentalHomeList(Model model, int hostNo) {
     List<RentalHome> list = hostService.rentalHomeList(hostNo);
     for (RentalHome rentalHome : list) {
-      System.out.println(rentalHome.getRentalHomeNo());
+      log.debug("테스트:" + rentalHome.getRentalHomeNo());
     }
     model.addAttribute("list", list);
   }
 
   // 숙소 상태 변경
   @PostMapping("rentalHomeStateUpdate")
-  public String rentalHomeStateUpdate(int rentalHomeNo, String state) {
+  public String rentalHomeStateUpdate(int rentalHomeNo, char state) {
 
     hostService.rentalHomeStateUpdate(state, rentalHomeNo);
 
@@ -198,6 +197,8 @@ public class HostController {
   @GetMapping("rentalHomeView")
   public void rentalHomeView(int rentalHomeNo, Model model, SessionStatus sessionStatus)
       throws Exception {
+    RentalHome rentalHome = hostService.getRentalHome(rentalHomeNo);
+    log.debug(rentalHome.getRentalHomeNo());
 
     model.addAttribute("themeList", hostService.themeList());
     model.addAttribute("facilityList", hostService.facilityList());
@@ -224,16 +225,16 @@ public class HostController {
       SessionStatus sessionStatus
   ) throws Exception {
 
+    for (String str : facilityNames) {
+      log.debug("테스트:" + str);
+    }
+
     List<Region> regionList = hostService.regionList();
 
     for (Region region : regionList) {
       if (rentalHome.getAddress().contains(region.getRegionName())) {
         rentalHome.setRegion(region);
       }
-    }
-
-    if (rentalHome.getRentalHomePhotos() == null) {
-      System.out.println("true");
     }
 
     // 모든 숙소 정보 vo 형태에 맞게 변환 후 set
@@ -245,24 +246,24 @@ public class HostController {
           old.getRentalHomePhotos().getLast().getPhotoOrder());
       rentalHome.setRentalHomePhotos(newFiles);
     }
+
     if (existPhotoName != null) {
-      for (String photoName : existPhotoName) {
+      for (RentalHomePhoto oldPhoto : old.getRentalHomePhotos()) {
         boolean isPhotoFound = false;
 
-        for (RentalHomePhoto oldPhoto : old.getRentalHomePhotos()) {
-          if (oldPhoto.getUuidPhotoName().equals(photoName)) {
+        for (String photoName : existPhotoName) {
+          if (photoName.equals(oldPhoto.getUuidPhotoName())) {
             isPhotoFound = true;
             break;
           }
         }
         if (!isPhotoFound) {
           // 삭제 메서드 호출
-          hostService.deleteRentalHomePhotoByName(photoName);
-          storageService.delete(this.bucketName, uploadDir, photoName);
+          hostService.deleteRentalHomePhotoByName(oldPhoto.getUuidPhotoName());
+          storageService.delete(this.bucketName, uploadDir, oldPhoto.getUuidPhotoName());
         }
       }
     }
-
 
     rentalHome.setThemes(themeTransform(themeNos, themeNames, type));
     rentalHome.setRentalHomeFacilities(
@@ -310,13 +311,14 @@ public class HostController {
 
     for (HostReservation reservation : reservationList) {
       if (reservation.getState() != state_no) {
+
         filteredList.add(reservation);
       }
     }
     List<String> uuidPhotoNames = new ArrayList<>();
 
     for (HostReservation reservation : filteredList) {
-      String photo = memberService.get(reservation.getMemberNo()).getPhoto();
+      String photo = memberService.selectUserInfoForUpdateSession(reservation.getMemberNo()).getPhoto();
       if (photo != null) {
         uuidPhotoNames.add(photo);
       } else {

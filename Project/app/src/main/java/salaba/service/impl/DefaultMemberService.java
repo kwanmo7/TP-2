@@ -7,12 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import salaba.dao.MemberDao;
 import salaba.service.MemberService;
-import salaba.vo.Alarm;
-import salaba.vo.ConstVO;
 import salaba.vo.Member;
 import salaba.vo.Nation;
 import salaba.vo.board.Board;
-import salaba.vo.rental_home.Theme;
 
 @RequiredArgsConstructor
 @Service
@@ -22,17 +19,22 @@ public class DefaultMemberService implements MemberService {
   private final MemberDao memberDao;
 
   @Override
-  public void add(Member member) {
-    memberDao.add(member);
+  public int addMember(Member member) {
+    return memberDao.addMember(member);
   }
 
   @Override
-  public Member get(String email, String password) {
-    return memberDao.findByEmailAndPassword(email, password);
+  public Member selectUserInfoForLogin(String email, String password) {
+    return memberDao.selectUserInfoForLogin(email, password);
   }
 
   @Override
-  public Member get(int no) {
+  public Member selectUserInfoForUpdateSession(int memberNo) {
+    return memberDao.selectUserInfoForUpdateSession(memberNo);
+  }
+
+  @Override
+  public Member selectUserInfoForLogin(int no) {
     return memberDao.selectMemberInfo(no);
   }
 
@@ -42,21 +44,23 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
-  public int myinfoUpdate(Member member) {
-    return memberDao.myinfoUpdate(member);
+  public int updateUserInfo(Member member) {
+    return memberDao.updateUserInfo(member);
   }
 
   @Override
-  public Member checkNickname(String nickname) {
+  public int checkNickname(String nickname) {
     return memberDao.checkNickname(nickname);
   }
+////////////////
+  @Override
+  public int checkEmail(String email) {
+    return memberDao.checkEmail(email);
+  }
 
   @Override
-  public int delete(Member member) {
-    ConstVO constVO = new ConstVO();
-
-    member.setState(constVO.member_state_resign);
-    return memberDao.delete(member);
+  public int updateMemberWithdrawal(int memberNo) {
+    return memberDao.updateMemberWithdrawal(memberNo);
   }
 
   @Override
@@ -75,58 +79,27 @@ public class DefaultMemberService implements MemberService {
   }
 
   @Override
-  public Member myinfoCheckPassword(Member member) {
-    return memberDao.myinfoCheckPassword(member);
+  public int checkPassword(int memberNo, String password) {
+    return memberDao.checkPassword(memberNo, password);
   }
-
   @Override
   public void insertPreference(Member member) {
     memberDao.insertPreference(member);
   }
 
   @Override
-  public void deletePreference(Member member) {
-    memberDao.deletePreference(member);
-  }
-
-  @Override
-  public List<Member> themeList(Member sessionInfo) {
-    return memberDao.findAllTheme(sessionInfo);
-  }
-
-  @Override
-  public String getMemberPoint(Member member) {
-    return memberDao.getMemberPoint(member);
-  }
-
-  @Override
-  public Member getGrade(Member member) {
-    return memberDao.getGrade(member);
-  }
-
-  @Override
-  public List<Member> mythemeList(Member sessionInfo) {
-    return memberDao.findAllmyTheme(sessionInfo);
-  }
-
-  @Override
-  public void insertNotifyHistory (Alarm alarm){ // 알람 추가
-    memberDao.addNotifyHistory(alarm);
-  }
-
-  @Override
-  public List<Alarm> selectNotifyHistory ( int memberNo){ // 알람 가져오기
-    return memberDao.selectNotifyHistory(memberNo);
-  }
-
-  @Override
-  public void updateNotifyHistory ( int notifyNo){ // 알람 업데이트(알람을 읽었을 경우 업데이트)
-    memberDao.updateNotifyHistory(ConstVO.state_ok, notifyNo);
+  public void deletePreference(int memberNo) {
+    memberDao.deletePreference(memberNo);
   }
 
   @Override
   public String boardStateCheck(Board board){ // 알람 업데이트(알람을 읽었을 경우 업데이트)
     return memberDao.boardStateCheck(board);
+  }
+
+  @Override
+  public Member selectEmailForGoogle(String email) {
+    return memberDao.selectEmailForGoogle(email);
   }
 }
 

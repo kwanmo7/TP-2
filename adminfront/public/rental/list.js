@@ -11,7 +11,12 @@
         .then((response) => {
             let result = response.data;
             if (result.status == 'failure') {
-                alert(response.error);
+                Swal.fire({
+                    icon: "error",
+                    title: response.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 return;
             }
 
@@ -33,17 +38,17 @@
                 let modal = $('#detailModal');
                 let modalContent = $('#modalContent')
                 let rentalNo = $(this).find('.rentalNo').text();
-                console.log(rentalNo, modal);
                 
-                console.log("modal!")
                 modal.css('display', 'block'); // 모달을 보이도록 설정
                 modalContent.css('display', 'block'); // 모달을 보이도록 설정
                 axiosInstance.get(`${RESTAPI_HOST}/rental/view/${pageContext.params.get("menu")}/${rentalNo}`)
                 .then((response) => {
                     let data = response.data.data;
-                    console.log(data);
+                    data.price = formatToKRW(data.price);
+                    data.cleanFee = formatToKRW(data.cleanFee);
                     let detailTemplate = Handlebars.compile($("#detail-template").html());
                     modalContent.html(detailTemplate(data));
+                    hideFacility();
                     if (menu != 2) {
                         $('.dealBtn').hide();
                     }
@@ -61,11 +66,22 @@
                         axiosInstance.put(`${RESTAPI_HOST}/rental/update`, requestData)
                         .then((response) => {
                             if (response.state == 'failure') {
-                                alert('숙소 승인/거부 오류')
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "처리중 오류 발생",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                  });
                                 return;
                             }
-                            alert('처리 되었습니다.')
-                            closeButton.click();
+                            Swal.fire({
+                                icon: "success",
+                                title: "성공적으로 처리되었습니다.",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                closeButton.click();
+                            });
                         });
                     }) 
                 })
@@ -101,3 +117,22 @@
         })
     });
 
+
+    function formatToKRW(number) {
+        // Intl.NumberFormat을 사용하여 원화 표시 및 천 단위 구분 기호 추가
+        return new Intl.NumberFormat('ko-KR', {
+            style: 'currency',
+            currency: 'KRW',
+            minimumFractionDigits: 0, // 소수점 이하 자릿수 설정 (원하는 경우 변경 가능)
+            maximumFractionDigits: 0
+        }).format(number);
+    }
+
+    function hideFacility() {
+        $('.typeBox').each((index, element) => {
+            let ele = $(element);
+            if (ele.find('span').first().text() > 3) {
+                ele.hide();
+            }
+        })
+    }

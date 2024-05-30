@@ -30,22 +30,24 @@
       <button class="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 </form>
-<table border="1">
-    <thead>
-    <tr>
-        <th>No</th>
-        <th>숙소명</th>
+<div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>숙소명</th>
         <th id="changing-th"></th>
         <th>등록일</th>
         <th>상태</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    <tfoot>
-    <td colspan="10" class="tablefoot"></td>
-    </tfoot>
-</table>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody></tbody>
+    </table>
+  </div>
 </div>
 
 <div id="detailModal" class="modal">
@@ -93,11 +95,11 @@
                 <div class="hr"></div>
             </div>
             <div class="infoBox">
-                <div class="info"><span>숙소 설명</span> <span>{{explanation}}</span></div>
+                <div class="info"><span>숙소 설명</span> <textarea readonly>{{explanation}}</textarea></div>
                 <div class="hr"></div>
             </div>
             <div class="infoBox">
-                <div class="info"><span>숙소 이용규칙</span> <span>{{rule}}</span></div>
+                <div class="info"><span>숙소 이용규칙</span> <textarea readonly>{{rule}}</textarea></div>
                 <div class="hr"></div>
             </div>
             <div class="infoBox">
@@ -119,7 +121,8 @@
             </div>
             {{#each facilities}}
             <div>
-                <div class="infoBox" data-th-if="*{facilityNo < 4}">
+                <div class="infoBox typeBox" data-th-if="*{facilityNo < 4}">
+                    <span hidden>{{facilityNo}}</span>
                     <div class="info basicFacility">
                         <span>{{name}}</span >
                         <span>{{count}}</span>
@@ -133,7 +136,7 @@
             <div class="itemList">
             {{#each facilities}}
             <div>
-                <span data-th-if="*{facilityNo > 3}">{{name}}</span>
+                <span>{{name}}</span>
             </div>
             {{/each}}
             </div>
@@ -143,11 +146,11 @@
             <div class="itemList">
             {{#each themes}}
             <div>
-                <span  data-th-if="*{themeNo >= 10}">{{themeName}}</span>
+                <span>{{themeName}}</span>
             </div>
             {{/each}}
             </div>
-            <div>
+            <div class="dealBox">
                 <button id="approve" class="dealBtn">등록 승인</button>
                 <button id="reject" class="dealBtn">등록 거부</button>
             </div>
@@ -155,11 +158,11 @@
         </form>
         </div>
 </script>
-
-<script src="/js/list.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/common.js"></script>
 <script src="/js/page-init.js"></script>
 <script src="list.js"></script>
+<script src="/js/list.js"></script>
 
 </body>
 </html>

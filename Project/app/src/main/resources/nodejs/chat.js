@@ -17,7 +17,8 @@ const region = config.ncpregionname;
 const access_key = config.ncpaccesskey;
 const secret_key = config.ncpsecretkey;
 const bucket_name = config.ncpbucketname;
-const uploadDir = 'chat/'
+const uploadDir = 'chat/';
+const localDir = '../chat/log/';
 const chat = express(); // 'express' 변수명 수정
 const server = http.createServer(chat);
 const wss = new WebSocket.Server({ server });
@@ -68,8 +69,8 @@ wss.on('connection', (ws) => {
     const roomInfo = sentPreviousMessagesRooms.get(messageObj.reservationNo);
 
     chatFile.chatFileName = messageObj.chatName;
-    chatFile.chatFilePath = 'tmp/';
-    chatFile.chatFileFullPath ='tmp/' + chatFile.chatFileName;
+    chatFile.chatFilePath = localDir;
+    chatFile.chatFileFullPath = localDir + chatFile.chatFileName;
 
 
     if(messageObj.message === 'getChat'){
@@ -136,9 +137,22 @@ function deleteChatUser(ws){
     });
 
     if(roomInfo.size === 0){ // Map에 해당 채팅방에 사용자가 없는경우
-      sentPreviousMessagesRooms.delete(reservationNo); // 채팅방 완전 삭제
-      uploadFile(); // 스토리지 서버에 파일 업로드
+      if (fs.existsSync(chatFile.chatFileFullPath)) {
+        fs.readFile(chatFile.chatFileFullPath, 'utf8', (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          sentPreviousMessagesRooms.delete(reservationNo); // 채팅방 완전 삭제
+          uploadFile(); // 스토리지 서버에 파일 업로드
+        });
+      } else {
+        console.log("채팅 기록 파일이 없습니다.");
+      }
     }
+
+
+
   });
 }
 

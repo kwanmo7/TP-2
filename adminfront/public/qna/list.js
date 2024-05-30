@@ -10,6 +10,11 @@ const tbody = $("tbody");
     }
     var trTemplate = Handlebars.compile($("#tr-template").html());
     $("tbody").html(trTemplate(result));
+    let incomplete = pageContext.params.get("incomplete");
+
+    if (incomplete == 'true') {
+        $('#incomplete').click();
+    }
 
     $(".rowItem").click(function () {
       let modal = $("#detailModal");
@@ -30,8 +35,9 @@ const tbody = $("tbody");
           modalContent.html(detailTemplate(data));
           console.log(data.state);
           if (data.state != "0") {
-            $("#answer").prop("readonly", true);
-            $(".dealBtn").hide();
+            $(".dealBox").hide();
+          } else {
+            $('.answer-info').hide();
           }
 
           $(".dealBtn").click((e) => {
@@ -46,10 +52,22 @@ const tbody = $("tbody");
             axiosInstance.post(`${RESTAPI_HOST}/qna/update`, requestData)
               .then((response) => {
                 if (response.status == "failure") {
-                  alert("이미 처리되었습니다.");
+                  Swal.fire({
+                    icon: "error",
+                    title: "처리중 오류 발생",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                   return;
                 }
-                closeButton.click();
+                Swal.fire({
+                  icon: "success",
+                  title: "성공적으로 처리되었습니다.",
+                  showConfirmButton: false,
+                  timer: 1500
+              }).then(() => {
+                  closeButton.click();
+              });
               })
            
           });
