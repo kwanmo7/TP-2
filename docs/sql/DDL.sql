@@ -503,7 +503,7 @@ CREATE TABLE rental_home_review (
 	reservation_no INT NOT NULL,
 	created_date DATE DEFAULT (current_date),
 	score INT NOT NULL,
-	review VARCHAR(255) NOT NULL,
+	review text NOT NULL,
 	state CHAR(1) DEFAULT '0'
 );
 
@@ -543,8 +543,8 @@ CREATE TABLE reservation (
 	reservation_no INT NOT NULL,
 	member_no INT NOT NULL,
 	rental_home_no INT NOT NULL,
-	start_date DATETIME NOT NULL,
-	end_date DATETIME NOT NULL,
+	start_date DATE NOT NULL,
+	end_date DATE NOT NULL,
 	state CHAR(1) DEFAULT '0',
 	chat_file_name VARCHAR(255) NOT NULL,
 	number_of_people INT DEFAULT '1'
